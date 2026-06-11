@@ -20,7 +20,8 @@ body{
     justify-content:center;
     align-items:center;
     overflow-x:hidden;
-    font-family:Segoe UI,sans-serif;
+    font-family:'Segoe UI',sans-serif;
+    padding:20px;
 }
 
 .scene{
@@ -37,29 +38,39 @@ body{
     top:120px;
     transform:translateX(-50%);
     border-radius:50%;
-    background:radial-gradient(
+
+    background:
+    radial-gradient(
         circle,
         rgba(255,50,90,.45),
         transparent 75%
     );
+
     animation:pulse 4s infinite alternate;
 }
 
 @keyframes pulse{
+
     from{
-        transform:translateX(-50%) scale(.9);
+        transform:translateX(-50%) scale(.92);
+        opacity:.7;
     }
+
     to{
-        transform:translateX(-50%) scale(1.1);
+        transform:translateX(-50%) scale(1.08);
+        opacity:1;
     }
 }
 
 .dome{
     position:absolute;
+
     width:240px;
     height:420px;
+
     left:50%;
     transform:translateX(-50%);
+
     bottom:60px;
 
     border-radius:130px 130px 0 0;
@@ -74,18 +85,43 @@ body{
     box-shadow:
     inset 0 0 40px rgba(255,255,255,.08),
     0 10px 30px rgba(0,0,0,.7);
+
+    backdrop-filter:blur(2px);
+}
+
+.dome::after{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:inherit;
+
+    background:
+    linear-gradient(
+        120deg,
+        rgba(255,255,255,.12),
+        transparent 25%,
+        transparent 70%,
+        rgba(255,255,255,.04)
+    );
+
+    pointer-events:none;
 }
 
 .glass-highlight{
     position:absolute;
+
     left:18px;
     top:30px;
+
     width:12px;
     height:320px;
 
     border-radius:20px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to right,
         rgba(255,255,255,.28),
         transparent
@@ -94,8 +130,10 @@ body{
 
 .base{
     position:absolute;
+
     bottom:40px;
     left:50%;
+
     transform:translateX(-50%);
 
     width:270px;
@@ -103,7 +141,8 @@ body{
 
     border-radius:6px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to bottom,
         #444,
         #171717
@@ -115,16 +154,32 @@ body{
 
 .flower{
     position:absolute;
+
     bottom:15px;
     left:50%;
+
     transform:translateX(-50%);
 
     width:180px;
     height:380px;
+
+    animation:flowerFloat 5s ease-in-out infinite alternate;
+}
+
+@keyframes flowerFloat{
+
+    from{
+        transform:translateX(-50%) translateY(0);
+    }
+
+    to{
+        transform:translateX(-50%) translateY(-10px);
+    }
 }
 
 .stem{
     position:absolute;
+
     width:8px;
     height:260px;
 
@@ -135,7 +190,8 @@ body{
 
     border-radius:10px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to right,
         #1d6f30,
         #4ed06a,
@@ -145,11 +201,16 @@ body{
 
 .leaf{
     position:absolute;
-    background:linear-gradient(
+
+    background:
+    linear-gradient(
         135deg,
         #59d56f,
         #207a36
     );
+
+    box-shadow:
+    2px 2px 8px rgba(0,0,0,.3);
 }
 
 .leaf-left{
@@ -178,12 +239,27 @@ body{
 
 .bloom{
     position:absolute;
+
     top:30px;
     left:50%;
+
     transform:translateX(-50%);
 
     width:100px;
     height:100px;
+
+    animation:bloomGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes bloomGlow{
+
+    from{
+        filter:drop-shadow(0 0 4px rgba(255,70,100,.4));
+    }
+
+    to{
+        filter:drop-shadow(0 0 18px rgba(255,70,100,.9));
+    }
 }
 
 .petal{
@@ -196,7 +272,8 @@ body{
 
     left:20px;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to top,
         #7a001b,
         #d1153c
@@ -216,7 +293,8 @@ body{
 
     border-radius:60% 40% 50% 50%;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to top,
         #7a001b,
         #d1153c
@@ -234,7 +312,8 @@ body{
 
     border-radius:40% 60% 50% 50%;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to top,
         #7a001b,
         #d1153c
@@ -246,11 +325,13 @@ body{
     height:90px;
 
     left:21px;
+
     z-index:3;
 
     border-radius:50%;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to top,
         var(--red-dark),
         var(--red),
@@ -269,13 +350,19 @@ body{
 
 .spark{
     position:absolute;
+
     border-radius:50%;
     background:white;
-    box-shadow:0 0 10px white;
+
+    box-shadow:
+    0 0 10px white,
+    0 0 20px rgba(255,255,255,.8);
+
     animation:floatUp linear forwards;
 }
 
 @keyframes floatUp{
+
     from{
         opacity:0;
         transform:translateY(0);
@@ -293,16 +380,21 @@ body{
 
 .falling-petal{
     position:absolute;
+
     width:20px;
     height:26px;
 
     border-radius:50%;
 
-    background:linear-gradient(
+    background:
+    linear-gradient(
         to top,
         #900021,
         #ff476c
     );
+
+    box-shadow:
+    0 0 10px rgba(255,60,100,.4);
 
     animation:fall 6s linear forwards;
 }
@@ -335,15 +427,77 @@ body{
 
     font-size:1.3rem;
 
-    text-shadow:0 0 20px rgba(255,60,90,.5);
+    opacity:0;
+
+    animation:
+    fadeInMessage 2.5s ease-out 1s forwards,
+    messageGlow 4s ease-in-out infinite alternate;
+
+    text-shadow:
+    0 0 12px rgba(255,60,90,.4);
 
     margin-top:20px;
 }
 
 .signature{
+
     margin-top:20px;
 
     color:rgba(255,255,255,.35);
 
     font-size:.95rem;
+
+    opacity:0;
+
+    animation:
+    fadeInSignature 3s ease-out 3s forwards;
 }
+
+@keyframes fadeInMessage{
+
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@keyframes fadeInSignature{
+
+    from{
+        opacity:0;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes messageGlow{
+
+    from{
+        text-shadow:
+        0 0 10px rgba(255,60,90,.3);
+    }
+
+    to{
+        text-shadow:
+        0 0 22px rgba(255,60,90,.7),
+        0 0 40px rgba(255,60,90,.25);
+    }
+}
+
+@media (max-width:480px){
+
+    .scene{
+        transform:scale(.9);
+    }
+
+    .message{
+        font-size:1.05rem;
+    }
+        }
