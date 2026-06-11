@@ -1,44 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("fallingContainer");
 
-    // Función encargada de fabricar un pétalo dinámico
     function createPetal() {
         const petal = document.createElement("div");
         petal.classList.add("js-falling-petal");
 
-        // 1. Posición inicial aleatoria cerca del capullo de la rosa (centro)
-        const minLeft = 35; // % dentro de su contenedor
-        const maxLeft = 65; // % dentro de su contenedor
+        // 1. Punto de salida centrado desde donde está la flor unida
+        const minLeft = 35; 
+        const maxLeft = 55; 
         const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
         petal.style.left = `${randomLeft}%`;
 
-        // 2. Dimensiones aleatorias para que no se vean todos iguales
-        const randomSize = Math.floor(Math.random() * (22 - 14 + 1)) + 14; // entre 14px y 22px
-        petal.style.width = `${randomSize}px`;
-        petal.style.height = `${randomSize * 0.65}px`; // Proporción de aspecto del pétalo
-
-        // 3. Variables CSS personalizadas pasadas a la animación keyframe
-        const drift = (Math.random() * 40 - 20).toFixed(2); // Desplazamiento lateral (de -20px a 20px)
-        const rotation = (Math.random() * 360 - 180).toFixed(2); // Giro final en grados
+        // 2. Parámetros de trayectorias físicas aleatorias (Cae y se bambolea)
+        const drift = (Math.random() * 60 - 30).toFixed(2); // Desplazamiento horizontal (-30px a 30px)
+        const rotation = (Math.random() * 260 - 130).toFixed(2); // Rotación orgánica en el aire
         petal.style.setProperty('--drift', `${drift}px`);
         petal.style.setProperty('--rotation', `${rotation}deg`);
 
-        // 4. Duración de caída aleatoria (más lento o más rápido)
-        const duration = (Math.random() * 4 + 5).toFixed(2); // Entre 5s y 9s
+        // 3. Velocidad de caída constante pero con ligeras variaciones mágicas
+        const duration = (Math.random() * 3 + 6).toFixed(2); // Entre 6 y 9 segundos por pétalo
         petal.style.animationDuration = `${duration}s`;
 
-        // Insertar el pétalo en la escena
         container.appendChild(petal);
 
-        // Eliminar el elemento una vez termine de caer para no saturar la memoria
+        // Remover del DOM al tocar fondo para optimizar el rendimiento del navegador
         setTimeout(() => {
             petal.remove();
         }, duration * 1000);
     }
 
-    // Bucle generador: Crea un nuevo pétalo cada 3.5 segundos
-    setInterval(createPetal, 3500);
+    // Intervalo de caída constante en bucle
+    setInterval(createPetal, 4000);
 
-    // Crea el primer pétalo inmediatamente al cargar la página
+    // Lanzar el primer pétalo al instante
     createPetal();
 });
