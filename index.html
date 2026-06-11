@@ -3,49 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rosa Eterna</title>
+    <title>La Rosa Encantada</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="scene">
-        <div class="glow-core"></div>
+    <div class="canvas">
+        <div class="glow-bg"></div>
 
-        <div class="glass-dome"></div>
+        <div class="glass-dome">
+            <div class="reflection"></div>
+        </div>
 
-        <div class="rose-assembly">
-            <div class="rose-buds">
-                <div class="petal p-center"></div>
-                <div class="petal p-left"></div>
-                <div class="petal p-right"></div>
-                <div class="petal p-bottom-left"></div>
-                <div class="petal p-bottom-right"></div>
-            </div>
+        <div class="rose">
             <div class="stem">
-                <div class="leaf l-left"></div>
-                <div class="leaf l-right"></div>
+                <div class="thorn t1"></div>
+                <div class="thorn t2"></div>
+                <div class="leaf l1"></div>
+                <div class="leaf l2"></div>
+            </div>
+            <div class="petals">
+                <div class="petal center"></div>
+                <div class="petal left"></div>
+                <div class="petal right"></div>
+                <div class="petal back-left"></div>
+                <div class="petal back-right"></div>
             </div>
         </div>
 
-        <div class="falling-container" id="fallingContainer"></div>
+        <div class="base"></div>
 
-        <div class="ground-petals">
-            <div class="gp gp1"></div>
-            <div class="gp gp2"></div>
-            <div class="gp gp3"></div>
-            <div class="gp gp4"></div>
-        </div>
-
-        <div class="sparkles-container">
-            <div class="sparkle sp1"></div>
-            <div class="sparkle sp2"></div>
-            <div class="sparkle sp3"></div>
-            <div class="sparkle sp4"></div>
-        </div>
-
-        <div class="base-container">
-            <div class="flower-base"></div>
-        </div>
+        <div class="sparks-container"></div>
     </div>
 
     <script src="script.js"></script>
