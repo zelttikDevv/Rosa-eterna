@@ -89,12 +89,12 @@ body {
     z-index: 5;
 }
 
-/* --- EL TULIPÁN --- */
+/* --- CONTENEDOR FLOTANTE UNIFICADO --- */
 .flower-container {
     position: absolute;
     bottom: 52px; 
     width: 120px;
-    height: 340px;
+    height: 280px; /* Reducido para acoplar la escala real */
     z-index: 6; 
     display: flex;
     justify-content: center;
@@ -103,8 +103,8 @@ body {
 
 @keyframes floatFlower {
     0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(1deg); }
-    100% { transform: translateY(-15px) rotate(-1deg); }
+    50% { transform: translateY(-6px) rotate(0.5deg); }
+    100% { transform: translateY(-12px) rotate(-0.5deg); }
 }
 
 .tulip {
@@ -113,13 +113,13 @@ body {
     height: 100%;
 }
 
-/* Tallo con Degradado Estilizado 3D */
+/* Tallo Estilizado 3D */
 .stem {
     position: absolute;
     bottom: 0;
     left: 57px;
     width: 6px;
-    height: 240px;
+    height: 220px; /* Proporción corregida */
     background: linear-gradient(to right, #2e7d32 0%, #4caf50 50%, #1b5e20 100%);
     border-radius: 3px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
@@ -135,24 +135,24 @@ body {
 .leaf.l1 {
     width: 32px;
     height: 75px;
-    bottom: 40px;
-    left: 6px;
+    bottom: 30px;
+    left: 14px;
     background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
-    transform: rotate(15deg);
+    transform: rotate(20deg);
 }
 .leaf.l2 {
     width: 32px;
     height: 85px;
-    bottom: 90px;
-    left: 3px;
+    bottom: 75px;
+    left: -4px;
     background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
-    transform: scaleX(-1) rotate(25deg); 
+    transform: scaleX(-1) rotate(30deg); 
 }
 
-/* Capullo del Tulipán */
+/* Capullo del Tulipán Soldado Perfectamente sobre el Tallo */
 .tulip-head {
     position: absolute;
-    top: 45px;
+    top: 0px; /* Anclado firmemente al tope del contenedor del tallo */
     left: 30px;
     width: 60px;
     height: 65px;
@@ -161,7 +161,7 @@ body {
 
 @keyframes glowHead {
     0% { filter: drop-shadow(0 0 2px rgba(255, 42, 75, 0.4)); }
-    100% { filter: drop-shadow(0 0 12px rgba(255, 42, 75, 0.8)); }
+    100% { filter: drop-shadow(0 0 12px rgba(255, 42, 75, 0.7)); }
 }
 
 .tulip-head .petal {
@@ -201,7 +201,7 @@ body {
                 0 3px 8px rgba(0,0,0,0.4);
 }
 
-/* --- CONTENEDOR DE PARTÍCULAS --- */
+/* --- CONTENEDOR DE PARTÍCULAS INDEPENDIENTE --- */
 .sparks-container {
     position: absolute;
     width: 212px;
@@ -228,11 +228,11 @@ body {
     0% { transform: translateY(0) scale(0); opacity: 0; }
     20% { opacity: 0.9; }
     55% { opacity: 0.8; }
-    70% { opacity: 0; } /* Muere antes de acumularse arriba */
+    70% { opacity: 0; } 
     100% { transform: translateY(-260px) translateX(var(--drift)) scale(0.2); opacity: 0; }
 }
 
-/* Pétalos cayendo: Nacen exactamente abajo del capullo */
+/* Pétalos cayendo de manera balanceada desde la base real de la flor */
 .falling-petal {
     position: absolute;
     width: 22px;
@@ -246,7 +246,7 @@ body {
 
 @keyframes fallFromFlower {
     0% {
-        top: 115px; /* Altura corregida */
+        top: 105px; /* Ajuste orgánico absoluto con el nuevo layout en bloque */
         left: 95px;
         transform: rotate(0deg) scale(1);
     }
@@ -261,7 +261,7 @@ body {
     }
 }
 
-/* --- LA FRASE PRINCIPAL --- */
+/* --- FRASES Y TEXTOS --- */
 .romantic-phrase {
     margin-top: 25px;
     width: 85%;
@@ -282,13 +282,12 @@ body {
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* --- FOOTER SUTIL --- */
 footer {
     position: absolute;
     bottom: 22px;
     width: 90%;
     text-align: center;
-    color: rgba(255, 255, 255, 0.35); /* Blanco semitransparente premium */
+    color: rgba(255, 255, 255, 0.35); 
     font-size: 10pt;
     letter-spacing: 1.2px;
     font-weight: 300;
