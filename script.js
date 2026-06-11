@@ -1,48 +1,49 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector(".sparks-container");
+const particles = document.getElementById("particles");
 
-    // 1. Generador de pequeños brillos ambientales optimizados
-    function createSpark() {
-        const spark = document.createElement("div");
-        spark.classList.add("spark");
+function createSpark() {
 
-        const randomX = Math.random() * 160 + 30; 
-        const duration = Math.random() * 2.5 + 2.5; // Animación ligeramente más rápida para evitar atascos
-        const drift = Math.random() * 40 - 20; 
+    const spark = document.createElement("div");
 
-        spark.style.left = `${randomX}px`;
-        spark.style.setProperty("--duration", `${duration}s`);
-        spark.style.setProperty("--drift", `${drift}px`);
-        
-        const size = Math.random() * 2.5 + 1.8;
-        spark.style.width = `${size}px`;
-        spark.style.height = `${size}px`;
+    spark.classList.add("spark");
 
-        container.appendChild(spark);
+    const size = Math.random() * 3 + 2;
 
-        setTimeout(() => { spark.remove(); }, duration * 1000);
-    }
+    spark.style.width = size + "px";
+    spark.style.height = size + "px";
 
-    setInterval(createSpark, 160);
+    spark.style.left = Math.random() * 220 + "px";
+    spark.style.top = "350px";
 
-    // 2. Sistema infinito de pétalos desde el capullo
-    function spawnFallingPetal() {
-        const petal = document.createElement("div");
-        petal.classList.add("falling-petal");
-        
-        // Puntos aleatorios en el suelo de la cúpula
-        const targetX = Math.random() * 130 + 40;
-        const targetRotation = Math.random() * 100 - 50;
+    spark.style.animationDuration =
+        (Math.random() * 3 + 3) + "s";
 
-        petal.style.setProperty("--target-x", `${targetX}px`);
-        petal.style.setProperty("--target-rotation", `${targetRotation}deg`);
+    particles.appendChild(spark);
 
-        container.appendChild(petal);
-    }
+    setTimeout(() => {
+        spark.remove();
+    }, 6000);
+}
 
-    // Primer pétalo
-    setTimeout(spawnFallingPetal, 2000);
+setInterval(createSpark, 180);
 
-    // Caida cíclica cada 7 segundos
-    setInterval(spawnFallingPetal, 7000);
-});
+function createPetal() {
+
+    const petal = document.createElement("div");
+
+    petal.classList.add("falling-petal");
+
+    petal.style.setProperty(
+        "--targetX",
+        (Math.random() * 120 + 50) + "px"
+    );
+
+    particles.appendChild(petal);
+
+    setTimeout(() => {
+        petal.remove();
+    }, 6000);
+}
+
+setTimeout(createPetal, 3000);
+
+setInterval(createPetal, 8000);
