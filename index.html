@@ -3,36 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rosa Eterna CSS</title>
+    <title>Rosa Eterna - Proyecto Completo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+
+    <div class="scene">
+        <div class="glow-core"></div>
+
         <div class="glass-dome"></div>
-        <div class="base"></div>
 
         <div class="rose">
-            <div class="petals">
-                <div class="petal-center"></div>
-                <div class="petal-left"></div>
-                <div class="petal-right"></div>
+            <div class="rose-buds">
+                <div class="petal p1"></div>
+                <div class="petal p2"></div>
+                <div class="petal p3"></div>
+                <div class="petal p4"></div>
+                <div class="petal p5"></div>
             </div>
             <div class="stem">
-                <div class="leaf leaf-left"></div>
-                <div class="leaf leaf-right"></div>
+                <div class="sepal"></div>
+                <div class="leaf left"></div>
+                <div class="leaf right"></div>
             </div>
         </div>
 
-        <div class="fallen-petals">
-            <div class="fallen-petal-1"></div>
-            <div class="fallen-petal-2"></div>
+        <div class="falling-container" id="fallingContainer"></div>
+
+        <div class="ground-petals">
+            <div class="gp gp1"></div>
+            <div class="gp gp2"></div>
+            <div class="gp gp3"></div>
         </div>
 
-        <div class="sparkles">
-            <div class="sparkle s1"></div>
-            <div class="sparkle s2"></div>
-            <div class="sparkle s3"></div>
+        <div class="sparkles-container">
+            <div class="sparkle sp1"></div>
+            <div class="sparkle sp2"></div>
+            <div class="sparkle sp3"></div>
+            <div class="sparkle sp4"></div>
+            <div class="sparkle sp5"></div>
+        </div>
+
+        <div class="base-container">
+            <div class="flower-base"></div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
