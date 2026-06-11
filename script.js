@@ -1,20 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector(".sparks-container");
 
-    // 1. Generación continua de pequeños brillos mágicos ambientales
+    // 1. Generador de pequeños brillos ambientales optimizados
     function createSpark() {
         const spark = document.createElement("div");
         spark.classList.add("spark");
 
-        const randomX = Math.random() * 180 + 20; 
-        const duration = Math.random() * 3.5 + 3; 
-        const drift = Math.random() * 50 - 25; 
+        const randomX = Math.random() * 160 + 30; 
+        const duration = Math.random() * 2.5 + 2.5; // Animación ligeramente más rápida para evitar atascos
+        const drift = Math.random() * 40 - 20; 
 
         spark.style.left = `${randomX}px`;
         spark.style.setProperty("--duration", `${duration}s`);
         spark.style.setProperty("--drift", `${drift}px`);
         
-        const size = Math.random() * 2.5 + 2;
+        const size = Math.random() * 2.5 + 1.8;
         spark.style.width = `${size}px`;
         spark.style.height = `${size}px`;
 
@@ -23,18 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => { spark.remove(); }, duration * 1000);
     }
 
-    setInterval(createSpark, 140);
+    setInterval(createSpark, 160);
 
-
-    // 2. Sistema infinito de pétalos cayendo DIRECTAMENTE DESDE EL TULIPÁN
+    // 2. Sistema infinito de pétalos desde el capullo
     function spawnFallingPetal() {
         const petal = document.createElement("div");
         petal.classList.add("falling-petal");
         
-        // Puntos de caída distribuidos aleatoriamente en el piso de la cúpula
-        const targetX = Math.random() * 140 + 35;
-        
-        // Ángulos orgánicos de descanso
+        // Puntos aleatorios en el suelo de la cúpula
+        const targetX = Math.random() * 130 + 40;
         const targetRotation = Math.random() * 100 - 50;
 
         petal.style.setProperty("--target-x", `${targetX}px`);
@@ -43,9 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
         container.appendChild(petal);
     }
 
-    // El primer pétalo cae a los 2.5 segundos de cargar la web
-    setTimeout(spawnFallingPetal, 2500);
+    // Primer pétalo
+    setTimeout(spawnFallingPetal, 2000);
 
-    // Bucle continuo: un pétalo desprendiéndose de la flor cada 6.5 segundos
-    setInterval(spawnFallingPetal, 6500);
+    // Caida cíclica cada 7 segundos
+    setInterval(spawnFallingPetal, 7000);
 });
