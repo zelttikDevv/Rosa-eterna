@@ -3,7 +3,6 @@
     --tulip-red: #ff2a4b;
     --tulip-dark: #a10f24;
     --tulip-light: #ff7388;
-    --stem-green: #388e3c;
     --glow-color: rgba(255, 42, 75, 0.4);
 }
 
@@ -90,7 +89,7 @@ body {
     z-index: 5;
 }
 
-/* --- EL TULIPÁN CON ANIMACIÓN DE MOVIMIENTO Y BRILLO --- */
+/* --- EL TULIPÁN --- */
 .flower-container {
     position: absolute;
     bottom: 52px; 
@@ -99,20 +98,13 @@ body {
     z-index: 6; 
     display: flex;
     justify-content: center;
-    /* Nueva animación de desplazamiento vertical y vaivén */
     animation: floatFlower 5s ease-in-out infinite alternate;
 }
 
 @keyframes floatFlower {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-8px) rotate(1deg);
-    }
-    100% {
-        transform: translateY(-15px) rotate(-1deg);
-    }
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(1deg); }
+    100% { transform: translateY(-15px) rotate(-1deg); }
 }
 
 .tulip {
@@ -121,31 +113,31 @@ body {
     height: 100%;
 }
 
-/* Tallo */
+/* Tallo con Degradado Estilizado 3D (Efecto de Volumen) */
 .stem {
     position: absolute;
     bottom: 0;
     left: 57px;
     width: 6px;
     height: 240px;
-    background-color: var(--stem-green);
+    background: linear-gradient(to right, #2e7d32 0%, #4caf50 50%, #1b5e20 100%);
     border-radius: 3px;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 }
 
-/* Hojas */
+/* Hojas con Degradado Curvo e Iluminación Dinámica */
 .leaf {
     position: absolute;
-    background-color: var(--stem-green);
     border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
     transform-origin: left bottom;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
 }
 .leaf.l1 {
     width: 32px;
     height: 75px;
     bottom: 40px;
     left: 6px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
     transform: rotate(15deg);
 }
 .leaf.l2 {
@@ -153,17 +145,17 @@ body {
     height: 85px;
     bottom: 90px;
     left: 3px;
+    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
     transform: scaleX(-1) rotate(25deg); 
 }
 
-/* Capullo del Tulipán Rediseñado (Con pulso de brillo incorporado) */
+/* Capullo del Tulipán */
 .tulip-head {
     position: absolute;
     top: 45px;
     left: 30px;
     width: 60px;
     height: 65px;
-    filter: drop-shadow(0 0 1px var(--tulip-red));
     animation: glowHead 3s ease-in-out infinite alternate;
 }
 
@@ -172,7 +164,6 @@ body {
     100% { filter: drop-shadow(0 0 12px rgba(255, 42, 75, 0.8)); }
 }
 
-/* Estilización 3D de los pétalos mediante Degradados */
 .tulip-head .petal {
     position: absolute;
     bottom: 0;
@@ -210,7 +201,7 @@ body {
                 0 3px 8px rgba(0,0,0,0.4);
 }
 
-/* --- CONTENEDOR DE PARTÍCULAS MEJORADO --- */
+/* --- CONTENEDOR DE PARTÍCULAS (MURIENDO ANTES DE TOCAR EL TECHO) --- */
 .sparks-container {
     position: absolute;
     width: 212px;
@@ -218,10 +209,9 @@ body {
     bottom: 52px;
     z-index: 7; 
     pointer-events: none;
-    overflow: hidden; /* Mantiene los elementos dentro del vidrio de forma limpia */
+    overflow: hidden;
 }
 
-/* Arreglo de Brillos: se desvanecen antes de chocar drásticamente arriba */
 .spark {
     position: absolute;
     width: 4px;
@@ -237,12 +227,12 @@ body {
 @keyframes floatSpark {
     0% { transform: translateY(0) scale(0); opacity: 0; }
     20% { opacity: 0.9; }
-    75% { opacity: 0.9; }
-    95% { opacity: 0; }
-    100% { transform: translateY(-350px) translateX(var(--drift)) scale(0.4); opacity: 0; }
+    55% { opacity: 0.8; }
+    70% { opacity: 0; } /* Se desvanece por completo antes de acumularse arriba */
+    100% { transform: translateY(-260px) translateX(var(--drift)) scale(0.2); opacity: 0; }
 }
 
-/* Pétalos cayendo alineados con el capullo dinámico */
+/* Pétalos cayendo: CORREGIDA ALTURA INICIAL PARA SALIR DE ABAJO */
 .falling-petal {
     position: absolute;
     width: 22px;
@@ -256,7 +246,7 @@ body {
 
 @keyframes fallFromFlower {
     0% {
-        top: 90px; /* Ajustado perfectamente a la base del capullo */
+        top: 115px; /* BAJADO A 115px para nacer justo en la unión con el tallo */
         left: 95px;
         transform: rotate(0deg) scale(1);
     }
@@ -277,7 +267,7 @@ body {
         transform: rotate(-15deg) scale(0.8);
     }
     100% {
-        top: 382px; /* Posición ideal en el suelo metálico */
+        top: 382px; 
         left: var(--target-x);
         transform: rotate(var(--target-rotation)) scale(0.8);
     }
@@ -302,4 +292,4 @@ body {
 @keyframes fadeInPhrase {
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
-        }
+    }
