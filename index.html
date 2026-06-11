@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Tulipán Encantado</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulipán Eterno</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="canvas">
-        <!-- Brillo de fondo nítido -->
-        <div class="glow-bg"></div>
+<div class="scene">
 
-        <!-- Cúpula de Cristal -->
-        <div class="glass-dome">
-            <div class="reflection"></div>
-        </div>
+    <div class="ambient-glow"></div>
 
-        <!-- El Tulipán (Posicionado al frente sin blur, con degradados 3D) -->
-        <div class="flower-container">
-            <div class="tulip">
-                <!-- Tallo y hojas del tulipán con volumen dinámico -->
-                <div class="stem"></div>
-                <div class="leaf l1"></div>
-                <div class="leaf l2"></div>
-                
-                <!-- Capullo del Tulipán -->
-                <div class="tulip-head">
-                    <div class="petal back-left"></div>
-                    <div class="petal back-right"></div>
-                    <div class="petal center-petal"></div>
-                </div>
+    <div class="dome">
+
+        <div class="glass-highlight"></div>
+
+        <div class="flower">
+
+            <div class="stem"></div>
+
+            <div class="leaf leaf-left"></div>
+            <div class="leaf leaf-right"></div>
+
+            <div class="bloom">
+
+                <div class="petal petal-left"></div>
+                <div class="petal petal-right"></div>
+                <div class="petal petal-back"></div>
+                <div class="petal petal-center"></div>
+
             </div>
+
         </div>
 
-        <!-- Base de la cúpula -->
-        <div class="base"></div>
+        <div id="particles"></div>
 
-        <!-- Contenedor para elementos dinámicos (pétalos y brillos) -->
-        <div class="sparks-container"></div>
     </div>
 
-    <!-- Frase romántica mejorada -->
-    <div class="romantic-phrase">
-        "Prometo amarte cada día, hasta que caiga el último pétalo de este tulipán eterno... Y aun así, mi amor sabrá encontrar la forma de volver a florecer."
-    </div>
+    <div class="base"></div>
 
-    <script src="script.js"></script>
+</div>
+
+<div class="message">
+    “Prometo amarte cada día, hasta que caiga el último pétalo de este tulipán eterno... Y aun así, mi amor sabrá encontrar la forma de volver a florecer.”
+</div>
+
+<div class="signature">
+    Eventualmente todo lo que es para ti termina encontrándote.
+</div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
