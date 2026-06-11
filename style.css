@@ -1,57 +1,117 @@
-/* Configuración del fondo oscuro como en el video */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     padding: 0;
-    background-color: #0d0d0d;
+    background-color: #0d0608;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    perspective: 1000px;
 }
 
-.container {
+.scene {
     position: relative;
-    width: 300px;
-    height: 450px;
+    width: 350px;
+    height: 500px;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 /* --- CÚPULA DE CRISTAL --- */
 .glass-dome {
     position: absolute;
     width: 220px;
-    height: 350px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 110px 110px 0 0; /* Forma curva arriba */
-    box-shadow: 0 0 30px rgba(0, 191, 255, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    height: 340px;
+    bottom: 110px; 
+    background: radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.03) 60%, rgba(255, 100, 120, 0.05) 100%);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-bottom: none;
+    border-radius: 110px 110px 0 0;
+    box-shadow: 0 0 40px rgba(255, 50, 80, 0.15), 
+                inset 0 0 25px rgba(255, 255, 255, 0.1),
+                inset -10px 0 20px rgba(0, 0, 0, 0.5);
     z-index: 5;
 }
 
-/* Brillo del cristal */
+.glass-dome::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 5px rgba(255, 255, 255, 0.5);
+}
+
 .glass-dome::after {
     content: '';
     position: absolute;
-    top: 10%;
-    left: 15%;
-    width: 15px;
-    height: 70%;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
+    top: 12%;
+    left: 12%;
+    width: 12px;
+    height: 65%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: 10px;
+    filter: blur(1px);
 }
 
-.base {
+/* --- RESPLANDOR INTERNO MÁGICO --- */
+.glow-core {
+    position: absolute;
+    width: 180px;
+    height: 260px;
+    bottom: 130px;
+    background: radial-gradient(circle at 50% 40%, rgba(255, 40, 80, 0.35) 0%, rgba(255, 20, 50, 0.1) 50%, rgba(0,0,0,0) 80%);
+    border-radius: 50%;
+    filter: blur(15px);
+    z-index: 2;
+    animation: pulseGlow 4s infinite ease-in-out;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 1; filter: blur(20px); }
+}
+
+/* --- LA BASE (.flower:after) --- */
+.base-container {
     position: absolute;
     bottom: 95px;
-    width: 260px;
-    height: 15px;
-    background: #1a1a1a;
-    border-radius: 10px;
-    border-bottom: 4px solid #0a0a0a;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     z-index: 4;
+}
+
+.flower-base {
+    position: relative;
+    height: 15px;
+    width: 250px;
+    background: #a52a2a; /* Color exacto del código del video */
+    border-radius: 4px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6),
+                inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+.flower-base::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 5%;
+    width: 90%;
+    height: 8px;
+    background: #5c1616;
+    border-radius: 0 0 4px 4px;
 }
 
 /* --- LA ROSA --- */
@@ -59,127 +119,215 @@ body {
     position: absolute;
     bottom: 110px;
     width: 100px;
-    height: 250px;
+    height: 240px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 2;
-}
-
-/* Pétalos superiores (Capullo) */
-.petals {
-    position: relative;
-    width: 80px;
-    height: 80px;
-}
-
-.petal-center {
-    position: absolute;
-    width: 40px;
-    height: 60px;
-    background: #ff2a4b;
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    left: 20px;
-    top: 10px;
-    box-shadow: inset 0 0 15px #990012;
     z-index: 3;
 }
 
-.petal-left {
-    position: absolute;
-    width: 50px;
-    height: 70px;
-    background: #e6193c;
-    border-radius: 70% 30% 50% 50% / 60% 40% 60% 40%;
-    left: 5px;
-    transform: rotate(-15deg);
-    box-shadow: inset -5px 0 10px #b3001b;
-    z-index: 2;
-}
-
-.petal-right {
-    position: absolute;
-    width: 50px;
-    height: 70px;
-    background: #ff3b58;
-    border-radius: 30% 70% 50% 50% / 40% 60% 40% 60%;
-    right: 5px;
-    transform: rotate(15deg);
-    box-shadow: inset 5px 0 10px #b3001b;
-    z-index: 1;
-}
-
-/* Tallo */
-.stem {
+.rose-buds {
     position: relative;
-    width: 6px;
-    height: 140px;
-    background: #2e6f40;
-    border-radius: 3px;
-    margin-top: -5px;
+    width: 66px;
+    height: 65px;
+    animation: floatRose 4s infinite ease-in-out;
 }
 
-/* Hojas */
-.leaf {
+@keyframes floatRose {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-6px) rotate(1deg); }
+}
+
+.petal {
     position: absolute;
-    width: 35px;
-    height: 20px;
-    background: #39854f;
-    box-shadow: inset 0 0 5px #1e4d2b;
+    background: linear-gradient(135deg, #ff416c 0%, #ff2e54 50%, #ba1331 100%);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
-.leaf-left {
-    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
-    left: -30px;
-    top: 40px;
-    transform: rotate(-15deg);
+.p1 {
+    width: 34px;
+    height: 45px;
+    left: 16px;
+    top: 10px;
+    border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+    z-index: 5;
+    background: linear-gradient(135deg, #ff527b 0%, #d61c40 100%);
 }
 
-.leaf-right {
-    border-radius: 0% 100% 0% 100% / 0% 100% 0% 100%;
-    right: -30px;
-    top: 70px;
-    transform: rotate(15deg);
-}
-
-/* --- PÉTALOS CAÍDOS --- */
-.fallen-petals div {
-    position: absolute;
-    background: #b3001b;
-    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+.p2 {
+    width: 44px;
+    height: 55px;
+    left: 3px;
+    top: 5px;
+    border-radius: 70% 40% 50% 50% / 60% 40% 60% 40%;
+    transform: rotate(-20deg);
     z-index: 4;
 }
 
-.fallen-petal-1 {
-    width: 30px;
-    height: 15px;
-    bottom: 110px;
-    left: 70px;
-    transform: rotate(-10deg);
-}
-
-.fallen-petal-2 {
-    width: 25px;
-    height: 12px;
-    bottom: 110px;
-    right: 80px;
+.p3 {
+    width: 44px;
+    height: 55px;
+    right: 3px;
+    top: 5px;
+    border-radius: 40% 70% 50% 50% / 40% 60% 40% 60%;
     transform: rotate(20deg);
+    z-index: 3;
 }
 
-/* --- DESTELLOS MÁGICOS (ANIMACIÓN) --- */
+.p4 {
+    width: 52px;
+    height: 60px;
+    left: -6px;
+    top: 2px;
+    border-radius: 80% 30% 60% 40% / 70% 40% 60% 40%;
+    transform: rotate(-35deg);
+    z-index: 2;
+}
+
+.p5 {
+    width: 52px;
+    height: 60px;
+    right: -6px;
+    top: 2px;
+    border-radius: 30% 80% 40% 60% / 40% 70% 40% 60%;
+    transform: rotate(35deg);
+    z-index: 1;
+}
+
+.stem {
+    position: relative;
+    width: 5px;
+    height: 135px;
+    background: linear-gradient(to right, #245c33, #194224);
+    border-radius: 3px;
+    margin-top: -2px;
+}
+
+.leaf {
+    position: absolute;
+    width: 32px;
+    height: 18px;
+    background: linear-gradient(135deg, #2e7a44 0%, #154222 100%);
+    box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
+    z-index: 2;
+}
+
+.leaf.left {
+    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+    left: -27px;
+    top: 35px;
+    transform: rotate(-25deg);
+    transform-origin: right bottom;
+}
+
+.leaf.right {
+    border-radius: 0% 100% 0% 100% / 0% 100% 0% 100%;
+    right: -27px;
+    top: 60px;
+    transform: rotate(25deg);
+    transform-origin: left bottom;
+}
+
+.sepal {
+    position: absolute;
+    top: -2px;
+    left: -5px;
+    width: 15px;
+    height: 8px;
+    background: #194224;
+    border-radius: 50% 50% 0 0;
+}
+
+/* --- PÉTALOS CAÍDOS DINÁMICOS (CONTROLADOS POR JS) --- */
+.falling-container {
+    position: absolute;
+    width: 180px;
+    height: 280px;
+    bottom: 110px;
+    overflow: hidden;
+    z-index: 4;
+    pointer-events: none;
+}
+
+.js-falling-petal {
+    position: absolute;
+    background: linear-gradient(135deg, #ff335c, #940921);
+    border-radius: 50% 50% 50% 50% / 70% 70% 40% 40%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 0 6px rgba(0,0,0,0.3);
+    opacity: 0;
+    top: -20px;
+    animation: fallEffect linear forwards;
+}
+
+@keyframes fallEffect {
+    0% {
+        top: 10%;
+        opacity: 0;
+        transform: translateX(0) rotate(0deg) scale(0.8);
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        top: 92%;
+        opacity: 1;
+        transform: translateX(var(--drift)) rotate(var(--rotation)) scale(1);
+    }
+    100% {
+        top: 95%;
+        opacity: 0;
+        transform: translateX(var(--drift)) rotate(var(--rotation)) scale(1);
+    }
+}
+
+/* Pétalos fijos del suelo */
+.ground-petals {
+    position: absolute;
+    bottom: 110px;
+    width: 180px;
+    height: 20px;
+    z-index: 4;
+}
+
+.gp {
+    position: absolute;
+    background: linear-gradient(135deg, #cc1433, #730514);
+    border-radius: 50% 50% 60% 40% / 60% 60% 40% 40%;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.4);
+}
+
+.gp1 { width: 24px; height: 10px; left: 25px; bottom: 2px; transform: rotate(-15deg); }
+.gp2 { width: 18px; height: 8px; left: 55px; bottom: 1px; transform: rotate(10deg); }
+.gp3 { width: 22px; height: 9px; right: 30px; bottom: 2px; transform: rotate(25deg); }
+
+/* --- DESTELLOS MÁGICOS --- */
+.sparkles-container {
+    position: absolute;
+    width: 200px;
+    height: 300px;
+    bottom: 110px;
+    z-index: 4;
+    pointer-events: none;
+}
+
 .sparkle {
     position: absolute;
-    background: white;
+    background: #ffffff;
     border-radius: 50%;
-    filter: blur(1px);
-    animation: glow 3s infinite ease-in-out;
+    box-shadow: 0 0 10px #ff7395, 0 0 20px #ff2e54;
+    animation: sparkleFloat 4s infinite ease-in-out;
+    opacity: 0;
 }
 
-.s1 { width: 4px; height: 4px; top: 40%; left: 30%; animation-delay: 0s; }
-.s2 { width: 6px; height: 6px; top: 30%; right: 25%; animation-delay: 1s; }
-.s3 { width: 3px; height: 3px; top: 60%; left: 45%; animation-delay: 1.5s; }
+.sp1 { width: 4px; height: 4px; left: 25%; top: 30%; animation-delay: 0s; }
+.sp2 { width: 5px; height: 5px; right: 25%; top: 20%; animation-delay: 1.5s; }
+.sp3 { width: 3px; height: 3px; left: 45%; top: 65%; animation-delay: 0.7s; }
+.sp4 { width: 4px; height: 4px; right: 35%; top: 50%; animation-delay: 2.2s; }
+.sp5 { width: 3px; height: 3px; left: 30%; top: 15%; animation-delay: 3s; }
 
-@keyframes glow {
-    0%, 100% { opacity: 0; transform: translateY(0) scale(0.8); }
-    50% { opacity: 0.8; transform: translateY(-10px) scale(1.2); box-shadow: 0 0 8px #ff9ebb; }
-}
+@keyframes sparkleFloat {
+    0% { transform: translateY(10px) scale(0.5); opacity: 0; }
+    50% { opacity: 0.9; transform: translateY(-15px) scale(1.2); }
+    100% { transform: translateY(-40px) scale(0.5); opacity: 0; }
+        }
+                              
