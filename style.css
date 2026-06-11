@@ -23,6 +23,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* Contenedor Principal */
 .canvas {
     position: relative;
     width: 400px;
@@ -32,6 +33,7 @@ body {
     align-items: center;
 }
 
+/* Brillo de Fondo */
 .glow-bg {
     position: absolute;
     width: 260px;
@@ -48,6 +50,7 @@ body {
     100% { transform: scale(1.05); opacity: 1; }
 }
 
+/* Cúpula de Cristal Nítida */
 .glass-dome {
     position: absolute;
     width: 220px;
@@ -73,6 +76,7 @@ body {
     border-radius: 10px;
 }
 
+/* Base de la cúpula */
 .base {
     position: absolute;
     width: 260px;
@@ -85,11 +89,12 @@ body {
     z-index: 5;
 }
 
+/* --- EL TULIPÁN --- */
 .flower-container {
     position: absolute;
     bottom: 52px; 
     width: 120px;
-    height: 340px; /* Altura original restaurada */
+    height: 340px;
     z-index: 6; 
     display: flex;
     justify-content: center;
@@ -108,17 +113,19 @@ body {
     height: 100%;
 }
 
+/* Tallo con Degradado Estilizado 3D (Efecto de Volumen) */
 .stem {
     position: absolute;
     bottom: 0;
     left: 57px;
     width: 6px;
-    height: 240px; /* Longitud original restaurada */
+    height: 240px;
     background: linear-gradient(to right, #2e7d32 0%, #4caf50 50%, #1b5e20 100%);
     border-radius: 3px;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
 }
 
+/* Hojas con Degradado Curvo e Iluminación Dinámica */
 .leaf {
     position: absolute;
     border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
@@ -142,6 +149,7 @@ body {
     transform: scaleX(-1) rotate(25deg); 
 }
 
+/* Capullo del Tulipán */
 .tulip-head {
     position: absolute;
     top: 45px;
@@ -193,6 +201,7 @@ body {
                 0 3px 8px rgba(0,0,0,0.4);
 }
 
+/* --- CONTENEDOR DE PARTÍCULAS (MURIENDO ANTES DE TOCAR EL TECHO) --- */
 .sparks-container {
     position: absolute;
     width: 212px;
@@ -219,10 +228,11 @@ body {
     0% { transform: translateY(0) scale(0); opacity: 0; }
     20% { opacity: 0.9; }
     55% { opacity: 0.8; }
-    70% { opacity: 0; } 
+    70% { opacity: 0; } /* Se desvanece por completo antes de acumularse arriba */
     100% { transform: translateY(-260px) translateX(var(--drift)) scale(0.2); opacity: 0; }
 }
 
+/* Pétalos cayendo: CORREGIDA ALTURA INICIAL PARA SALIR DE ABAJO */
 .falling-petal {
     position: absolute;
     width: 22px;
@@ -236,14 +246,26 @@ body {
 
 @keyframes fallFromFlower {
     0% {
-        top: 115px; 
+        top: 115px; /* BAJADO A 115px para nacer justo en la unión con el tallo */
         left: 95px;
         transform: rotate(0deg) scale(1);
     }
-    20% { left: 55px; transform: rotate(45deg) scale(0.95); }
-    45% { left: 135px; transform: rotate(-35deg) scale(0.9); }
-    70% { left: 65px; transform: rotate(25deg) scale(0.85); }
-    90% { left: 125px; transform: rotate(-15deg) scale(0.8); }
+    20% {
+        left: 55px;
+        transform: rotate(45deg) scale(0.95);
+    }
+    45% {
+        left: 135px;
+        transform: rotate(-35deg) scale(0.9);
+    }
+    70% {
+        left: 65px;
+        transform: rotate(25deg) scale(0.85);
+    }
+    90% {
+        left: 125px;
+        transform: rotate(-15deg) scale(0.8);
+    }
     100% {
         top: 382px; 
         left: var(--target-x);
@@ -251,6 +273,7 @@ body {
     }
 }
 
+/* --- LA FRASE --- */
 .romantic-phrase {
     margin-top: 25px;
     width: 85%;
@@ -269,21 +292,5 @@ body {
 @keyframes fadeInPhrase {
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
-}
-
-footer {
-    margin-top: 15px;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.35); 
-    font-size: 10pt;
-    letter-spacing: 1.2px;
-    font-weight: 300;
-    opacity: 0;
-    animation: fadeInFooter 3s ease-out 2s forwards;
-}
-
-@keyframes fadeInFooter {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
     }
-    
+        
