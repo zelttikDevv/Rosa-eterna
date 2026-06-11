@@ -1,296 +1,349 @@
-:root {
-    --bg-color: #050505;
-    --tulip-red: #ff2a4b;
-    --tulip-dark: #a10f24;
-    --tulip-light: #ff7388;
-    --glow-color: rgba(255, 42, 75, 0.4);
+:root{
+    --bg:#030303;
+    --red:#ff355d;
+    --red-dark:#8f001f;
+    --red-light:#ff8ea2;
+    --green:#3dbb57;
 }
 
-*, *::before, *::after {
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-color);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    overflow: hidden;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+body{
+    background:var(--bg);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    overflow-x:hidden;
+    font-family:Segoe UI,sans-serif;
 }
 
-/* Contenedor Principal */
-.canvas {
-    position: relative;
-    width: 400px;
-    height: 520px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.scene{
+    position:relative;
+    width:350px;
+    height:550px;
 }
 
-/* Brillo de Fondo */
-.glow-bg {
-    position: absolute;
-    width: 260px;
-    height: 360px;
-    background: radial-gradient(circle, var(--glow-color) 0%, rgba(5,5,5,0) 75%);
-    top: 10%;
-    z-index: 1;
-    border-radius: 50%;
-    animation: pulseGlow 4s ease-in-out infinite alternate;
+.ambient-glow{
+    position:absolute;
+    width:280px;
+    height:280px;
+    left:50%;
+    top:120px;
+    transform:translateX(-50%);
+    border-radius:50%;
+    background:radial-gradient(
+        circle,
+        rgba(255,50,90,.45),
+        transparent 75%
+    );
+    animation:pulse 4s infinite alternate;
 }
 
-@keyframes pulseGlow {
-    0% { transform: scale(0.95); opacity: 0.6; }
-    100% { transform: scale(1.05); opacity: 1; }
-}
-
-/* Cúpula de Cristal Nítida */
-.glass-dome {
-    position: absolute;
-    width: 220px;
-    height: 420px;
-    bottom: 50px;
-    border: 3.5px solid rgba(255, 255, 255, 0.25);
-    border-bottom: none;
-    border-radius: 110px 110px 0 0;
-    background: rgba(255, 255, 255, 0.02);
-    box-shadow: inset 0 25px 40px rgba(255, 255, 255, 0.08),
-                inset -15px 0 25px rgba(255, 255, 255, 0.03),
-                0 15px 35px rgba(0, 0, 0, 0.7);
-    z-index: 4; 
-}
-
-.reflection {
-    position: absolute;
-    top: 8%;
-    left: 20px;
-    width: 12px;
-    height: 82%;
-    background: linear-gradient(to right, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0) 100%);
-    border-radius: 10px;
-}
-
-/* Base de la cúpula */
-.base {
-    position: absolute;
-    width: 260px;
-    height: 22px;
-    background: linear-gradient(to bottom, #3a3a3a 0%, #1a1a1a 100%);
-    bottom: 30px;
-    border-radius: 4px;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.9),
-                inset 0 2px 3px rgba(255,255,255,0.25);
-    z-index: 5;
-}
-
-/* --- EL TULIPÁN --- */
-.flower-container {
-    position: absolute;
-    bottom: 52px; 
-    width: 120px;
-    height: 340px;
-    z-index: 6; 
-    display: flex;
-    justify-content: center;
-    animation: floatFlower 5s ease-in-out infinite alternate;
-}
-
-@keyframes floatFlower {
-    0% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-8px) rotate(1deg); }
-    100% { transform: translateY(-15px) rotate(-1deg); }
-}
-
-.tulip {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-/* Tallo con Degradado Estilizado 3D (Efecto de Volumen) */
-.stem {
-    position: absolute;
-    bottom: 0;
-    left: 57px;
-    width: 6px;
-    height: 240px;
-    background: linear-gradient(to right, #2e7d32 0%, #4caf50 50%, #1b5e20 100%);
-    border-radius: 3px;
-    box-shadow: 1px 1px 4px rgba(0,0,0,0.4);
-}
-
-/* Hojas con Degradado Curvo e Iluminación Dinámica */
-.leaf {
-    position: absolute;
-    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
-    transform-origin: left bottom;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
-}
-.leaf.l1 {
-    width: 32px;
-    height: 75px;
-    bottom: 40px;
-    left: 6px;
-    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
-    transform: rotate(15deg);
-}
-.leaf.l2 {
-    width: 32px;
-    height: 85px;
-    bottom: 90px;
-    left: 3px;
-    background: linear-gradient(135deg, #4caf50 0%, #2e7d32 60%, #1b5e20 100%);
-    transform: scaleX(-1) rotate(25deg); 
-}
-
-/* Capullo del Tulipán */
-.tulip-head {
-    position: absolute;
-    top: 45px;
-    left: 30px;
-    width: 60px;
-    height: 65px;
-    animation: glowHead 3s ease-in-out infinite alternate;
-}
-
-@keyframes glowHead {
-    0% { filter: drop-shadow(0 0 2px rgba(255, 42, 75, 0.4)); }
-    100% { filter: drop-shadow(0 0 12px rgba(255, 42, 75, 0.8)); }
-}
-
-.tulip-head .petal {
-    position: absolute;
-    bottom: 0;
-}
-
-.tulip-head .petal.back-left {
-    width: 36px;
-    height: 56px;
-    background: linear-gradient(135deg, var(--tulip-dark) 0%, #610512 100%);
-    left: 1px;
-    border-radius: 85% 15% 45% 45% / 100% 20% 50% 50%;
-    transform: rotate(-14deg);
-    box-shadow: inset 2px -2px 6px rgba(0,0,0,0.6);
-}
-
-.tulip-head .petal.back-right {
-    width: 36px;
-    height: 56px;
-    background: linear-gradient(-135deg, var(--tulip-dark) 0%, #610512 100%);
-    right: 1px;
-    border-radius: 15% 85% 45% 45% / 20% 100% 50% 50%;
-    transform: rotate(14deg);
-    box-shadow: inset -2px -2px 6px rgba(0,0,0,0.6);
-}
-
-.tulip-head .petal.center-petal {
-    width: 44px;
-    height: 62px;
-    background: linear-gradient(to top, var(--tulip-dark) 0%, var(--tulip-red) 50%, var(--tulip-light) 100%);
-    left: 8px;
-    border-radius: 50% 50% 45% 45% / 75% 75% 40% 40%;
-    z-index: 2;
-    box-shadow: inset 0 -6px 12px rgba(0,0,0,0.5), 
-                inset 0 4px 6px rgba(255,255,255,0.2),
-                0 3px 8px rgba(0,0,0,0.4);
-}
-
-/* --- CONTENEDOR DE PARTÍCULAS (MURIENDO ANTES DE TOCAR EL TECHO) --- */
-.sparks-container {
-    position: absolute;
-    width: 212px;
-    height: 410px;
-    bottom: 52px;
-    z-index: 7; 
-    pointer-events: none;
-    overflow: hidden;
-}
-
-.spark {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background-color: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 0 8px 2px var(--tulip-light);
-    bottom: 10px;
-    opacity: 0;
-    animation: floatSpark var(--duration) ease-in-out infinite;
-}
-
-@keyframes floatSpark {
-    0% { transform: translateY(0) scale(0); opacity: 0; }
-    20% { opacity: 0.9; }
-    55% { opacity: 0.8; }
-    70% { opacity: 0; } /* Se desvanece por completo antes de acumularse arriba */
-    100% { transform: translateY(-260px) translateX(var(--drift)) scale(0.2); opacity: 0; }
-}
-
-/* Pétalos cayendo: CORREGIDA ALTURA INICIAL PARA SALIR DE ABAJO */
-.falling-petal {
-    position: absolute;
-    width: 22px;
-    height: 28px;
-    background: linear-gradient(135deg, var(--tulip-red), var(--tulip-dark));
-    border-radius: 50% 50% 45% 45% / 65% 65% 45% 45%;
-    box-shadow: inset 0 2px 4px rgba(255,255,255,0.3), 1px 2px 4px rgba(0,0,0,0.5);
-    transform-origin: center;
-    animation: fallFromFlower 5.8s cubic-bezier(0.37, 0, 0.63, 1) forwards;
-}
-
-@keyframes fallFromFlower {
-    0% {
-        top: 115px; /* BAJADO A 115px para nacer justo en la unión con el tallo */
-        left: 95px;
-        transform: rotate(0deg) scale(1);
+@keyframes pulse{
+    from{
+        transform:translateX(-50%) scale(.9);
     }
-    20% {
-        left: 55px;
-        transform: rotate(45deg) scale(0.95);
-    }
-    45% {
-        left: 135px;
-        transform: rotate(-35deg) scale(0.9);
-    }
-    70% {
-        left: 65px;
-        transform: rotate(25deg) scale(0.85);
-    }
-    90% {
-        left: 125px;
-        transform: rotate(-15deg) scale(0.8);
-    }
-    100% {
-        top: 382px; 
-        left: var(--target-x);
-        transform: rotate(var(--target-rotation)) scale(0.8);
+    to{
+        transform:translateX(-50%) scale(1.1);
     }
 }
 
-/* --- LA FRASE --- */
-.romantic-phrase {
-    margin-top: 25px;
-    width: 85%;
-    max-width: 450px;
-    text-align: center;
-    color: #f5f5f5;
-    font-size: 13.5pt;
-    font-style: italic;
-    line-height: 1.6;
-    letter-spacing: 0.5px;
-    text-shadow: 0 2px 10px rgba(230, 30, 56, 0.5);
-    opacity: 0;
-    animation: fadeInPhrase 2.5s ease-out 1s forwards;
+.dome{
+    position:absolute;
+    width:240px;
+    height:420px;
+    left:50%;
+    transform:translateX(-50%);
+    bottom:60px;
+
+    border-radius:130px 130px 0 0;
+
+    border:3px solid rgba(255,255,255,.20);
+    border-bottom:none;
+
+    background:rgba(255,255,255,.03);
+
+    overflow:hidden;
+
+    box-shadow:
+    inset 0 0 40px rgba(255,255,255,.08),
+    0 10px 30px rgba(0,0,0,.7);
 }
 
-@keyframes fadeInPhrase {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+.glass-highlight{
+    position:absolute;
+    left:18px;
+    top:30px;
+    width:12px;
+    height:320px;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+        to right,
+        rgba(255,255,255,.28),
+        transparent
+    );
+}
+
+.base{
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:270px;
+    height:24px;
+
+    border-radius:6px;
+
+    background:linear-gradient(
+        to bottom,
+        #444,
+        #171717
+    );
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.8);
+}
+
+.flower{
+    position:absolute;
+    bottom:15px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:180px;
+    height:380px;
+}
+
+.stem{
+    position:absolute;
+    width:8px;
+    height:260px;
+
+    left:50%;
+    bottom:0;
+
+    transform:translateX(-50%);
+
+    border-radius:10px;
+
+    background:linear-gradient(
+        to right,
+        #1d6f30,
+        #4ed06a,
+        #1d6f30
+    );
+}
+
+.leaf{
+    position:absolute;
+    background:linear-gradient(
+        135deg,
+        #59d56f,
+        #207a36
+    );
+}
+
+.leaf-left{
+    width:45px;
+    height:100px;
+
+    bottom:70px;
+    left:30px;
+
+    border-radius:100% 0 100% 0;
+
+    transform:rotate(-55deg);
+}
+
+.leaf-right{
+    width:45px;
+    height:100px;
+
+    bottom:150px;
+    right:30px;
+
+    border-radius:0 100% 0 100%;
+
+    transform:rotate(55deg);
+}
+
+.bloom{
+    position:absolute;
+    top:30px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:100px;
+    height:100px;
+}
+
+.petal{
+    position:absolute;
+}
+
+.petal-back{
+    width:60px;
+    height:75px;
+
+    left:20px;
+
+    background:linear-gradient(
+        to top,
+        #7a001b,
+        #d1153c
+    );
+
+    border-radius:50%;
+}
+
+.petal-left{
+    width:50px;
+    height:75px;
+
+    left:6px;
+    top:12px;
+
+    transform:rotate(-22deg);
+
+    border-radius:60% 40% 50% 50%;
+
+    background:linear-gradient(
+        to top,
+        #7a001b,
+        #d1153c
+    );
+}
+
+.petal-right{
+    width:50px;
+    height:75px;
+
+    right:6px;
+    top:12px;
+
+    transform:rotate(22deg);
+
+    border-radius:40% 60% 50% 50%;
+
+    background:linear-gradient(
+        to top,
+        #7a001b,
+        #d1153c
+    );
+}
+
+.petal-center{
+    width:58px;
+    height:90px;
+
+    left:21px;
+    z-index:3;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        to top,
+        var(--red-dark),
+        var(--red),
+        var(--red-light)
+    );
+
+    box-shadow:
+    inset 0 -8px 10px rgba(0,0,0,.35),
+    inset 0 4px 8px rgba(255,255,255,.2);
+}
+
+#particles{
+    position:absolute;
+    inset:0;
+}
+
+.spark{
+    position:absolute;
+    border-radius:50%;
+    background:white;
+    box-shadow:0 0 10px white;
+    animation:floatUp linear forwards;
+}
+
+@keyframes floatUp{
+    from{
+        opacity:0;
+        transform:translateY(0);
     }
-        
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        opacity:0;
+        transform:translateY(-260px);
+    }
+}
+
+.falling-petal{
+    position:absolute;
+    width:20px;
+    height:26px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        to top,
+        #900021,
+        #ff476c
+    );
+
+    animation:fall 6s linear forwards;
+}
+
+@keyframes fall{
+
+    0%{
+        top:70px;
+        left:110px;
+    }
+
+    100%{
+        top:360px;
+        left:var(--targetX);
+        transform:rotate(540deg);
+    }
+}
+
+.message{
+    max-width:550px;
+    width:90%;
+
+    text-align:center;
+
+    color:white;
+
+    font-style:italic;
+
+    line-height:1.8;
+
+    font-size:1.3rem;
+
+    text-shadow:0 0 20px rgba(255,60,90,.5);
+
+    margin-top:20px;
+}
+
+.signature{
+    margin-top:20px;
+
+    color:rgba(255,255,255,.35);
+
+    font-size:.95rem;
+}
