@@ -1,36 +1,52 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("fallingContainer");
+    const container = document.querySelector(".sparks-container");
 
-    function createPetal() {
-        const petal = document.createElement("div");
-        petal.classList.add("js-falling-petal");
+    // 1. Generador de partículas de brillo (Sparks)
+    function createSpark() {
+        const spark = document.createElement("div");
+        spark.classList.add("spark");
 
-        // Aparecen justo debajo del capullo de la flor
-        const minLeft = 35; 
-        const maxLeft = 55; 
-        const randomLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1)) + minLeft;
-        petal.style.left = `${randomLeft}%`;
+        // Configuración aleatoria para cada brillo
+        const randomX = Math.random() * 180 + 20; // Dentro de la cúpula
+        const duration = Math.random() * 3 + 3; // Entre 3 y 6 segundos
+        const drift = Math.random() * 40 - 20; // Desviación horizontal
 
-        // Desviación lateral controlada y rotación final
-        const drift = (Math.random() * 40 - 20).toFixed(2); // Máximo 20px a los lados
-        const rotation = (Math.random() * 120 - 60).toFixed(2); 
+        spark.style.left = `${randomX}px`;
+        spark.style.setProperty("--duration", `${duration}s`);
+        spark.style.setProperty("--drift", `${drift}px`);
         
-        petal.style.setProperty('--drift', `${drift}px`);
-        petal.style.setProperty('--rotation', `${rotation}deg`);
+        // Tamaños variados
+        const size = Math.random() * 3 + 2;
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
 
-        // Caída fluida y constante (6 a 8 segundos)
-        const duration = (Math.random() * 2 + 6).toFixed(2); 
-        petal.style.animationDuration = `${duration}s`;
+        container.appendChild(spark);
 
-        container.appendChild(petal);
-
-        // Destrucción al terminar para mantener limpio el DOM de Vercel
+        // Limpieza de memoria
         setTimeout(() => {
-            petal.remove();
+            spark.remove();
         }, duration * 1000);
     }
 
-    // Intervalo de caída espaciado para que no se amontonen (un pétalo cada 4 segundos)
-    setInterval(createPetal, 4000);
-    createPetal();
+    // Intervalo constante de brillos
+    setInterval(createSpark, 150);
+
+    // 2. Sistema de caída de pétalos (Secuencia fiel al vídeo)
+    function dropPetal(delay, targetX, targetRotation) {
+        setTimeout(() => {
+            const petal = document.createElement("div");
+            petal.classList.add("falling-petal");
+            
+            // Pasamos las variables finales al CSS de manera dinámica
+            petal.style.setProperty("--target-x", `${targetX}px`);
+            petal.style.setProperty("--target-rotation", `${targetRotation}deg`);
+
+            container.appendChild(petal);
+        }, delay);
+    }
+
+    // Caída programada de pétalos como en el video de referencia
+    // dropPetal(Tiempo de espera en ms, Posición X en el suelo, Rotación final)
+    dropPetal(4000, 45, 65);   // Primer pétalo (Cae a la izquierda)
+    dropPetal(8000, 140, -45); // Segundo pétalo (Cae a la derecha)
 });
