@@ -3,54 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amor Eterno</title>
+<meta name="description" content="Una rosa eterna bajo cristal: un mensaje que florece para siempre.">
+<title>Rosa Eterna</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="scene">
+<main class="stage">
 
-    <div class="ambient-glow"></div>
+    <div class="scene" aria-hidden="true">
 
-    <div class="dome">
+        <div class="ambient-glow"></div>
 
-        <div class="glass-highlight"></div>
+        <div class="dome">
 
-        <div class="flower">
+            <div class="glass-highlight"></div>
 
-            <div class="stem"></div>
+            <div class="flower">
 
-            <div class="leaf leaf-left"></div>
-            <div class="leaf leaf-right"></div>
+                <div class="stem"></div>
 
-            <div class="bloom">
+                <div class="leaf leaf-left"></div>
+                <div class="leaf leaf-right"></div>
 
-                <div class="petal petal-left"></div>
-                <div class="petal petal-right"></div>
-                <div class="petal petal-back"></div>
-                <div class="petal petal-center"></div>
+                <div class="bloom">
+
+                    <div class="petal petal-back"></div>
+                    <div class="petal petal-left"></div>
+                    <div class="petal petal-right"></div>
+                    <div class="petal petal-center"></div>
+
+                </div>
 
             </div>
 
+            <div id="particles"></div>
+
         </div>
 
-        <div id="particles"></div>
+        <div class="base"></div>
 
     </div>
 
-    <div class="base"></div>
+    <blockquote class="message">
+        “Prometí amarte cada día, hasta que cayera el último pétalo de este tulipán eterno... La flor sigue aquí, cuidada y eterna. Y aunque hoy no estemos juntos, mi amor por ti también sigue aquí: siempre tendrás un lugar especial en mi corazón.”
+    </blockquote>
 
-</div>
+    <p class="signature">
+        Eventualmente todo lo que es para ti termina encontrándote.
+    </p>
 
-<div class="message">
-    “Prometo amarte cada día, hasta que caiga el último pétalo de este tulipán eterno... Y aun así, mi amor sabrá encontrar la forma de volver a florecer.”
-</div>
+</main>
 
-<div class="signature">
-    Eventualmente todo lo que es para ti termina encontrándote.
-</div>
-
-<script src="script.js"></script>
+<script src="script.js" defer></script>
 
 </body>
 </html>

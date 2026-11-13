@@ -1,9 +1,13 @@
 :root{
-    --bg:#030303;
+    --bg:#050507;
+    --bg-soft:#0c0d13;
     --red:#ff355d;
     --red-dark:#8f001f;
     --red-light:#ff8ea2;
     --green:#3dbb57;
+    --ink:#f6f1f2;
+    --ink-soft:rgba(246,241,242,.62);
+    --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
 }
 
 *{
@@ -12,41 +16,65 @@
     box-sizing:border-box;
 }
 
+html{
+    -webkit-text-size-adjust:100%;
+}
+
 body{
-    background:var(--bg);
+    background:
+        radial-gradient(ellipse 80% 55% at 50% 38%, rgba(255,53,93,.10), transparent 60%),
+        radial-gradient(ellipse 120% 90% at 50% 110%, var(--bg-soft), transparent 70%),
+        var(--bg);
     min-height:100vh;
+    min-height:100dvh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
     overflow-x:hidden;
-    font-family:'Segoe UI',sans-serif;
-    padding:20px;
+    font-family:var(--serif);
+    padding:32px 20px 40px;
+    color:var(--ink);
+}
+
+::selection{
+    background:rgba(255,53,93,.35);
+    color:#fff;
+}
+
+.stage{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
 }
 
 .scene{
     position:relative;
-    width:350px;
-    height:550px;
+    width:min(350px, 88vw);
+    height:auto;
+    aspect-ratio:350 / 550;
+    flex:none;
 }
 
 .ambient-glow{
     position:absolute;
-    width:280px;
-    height:280px;
+    width:80%;
+    aspect-ratio:1;
     left:50%;
-    top:120px;
+    top:22%;
     transform:translateX(-50%);
     border-radius:50%;
 
     background:
     radial-gradient(
         circle,
-        rgba(255,50,90,.45),
+        rgba(255,50,90,.42),
         transparent 75%
     );
 
-    animation:pulse 4s infinite alternate;
+    animation:pulse 4.5s ease-in-out infinite alternate;
+    will-change:transform, opacity;
 }
 
 @keyframes pulse{
@@ -65,28 +93,50 @@ body{
 .dome{
     position:absolute;
 
-    width:240px;
-    height:420px;
+    width:68.6%;
+    height:76.4%;
 
     left:50%;
     transform:translateX(-50%);
 
-    bottom:60px;
+    bottom:10.9%;
 
-    border-radius:130px 130px 0 0;
+    border-radius:54% 54% 0 0 / 31% 31% 0 0;
 
-    border:3px solid rgba(255,255,255,.20);
+    border:1px solid rgba(255,255,255,.28);
     border-bottom:none;
 
-    background:rgba(255,255,255,.03);
+    background:
+    linear-gradient(
+        165deg,
+        rgba(255,255,255,.07),
+        rgba(255,255,255,.015) 42%,
+        rgba(255,255,255,.045)
+    );
 
     overflow:hidden;
 
     box-shadow:
-    inset 0 0 40px rgba(255,255,255,.08),
-    0 10px 30px rgba(0,0,0,.7);
+    inset 0 0 48px rgba(255,255,255,.07),
+    inset 0 -30px 60px rgba(0,0,0,.35),
+    0 24px 48px rgba(0,0,0,.65);
+}
 
-    backdrop-filter:blur(2px);
+.dome::before{
+    content:"";
+
+    position:absolute;
+    left:50%;
+    bottom:-14px;
+
+    width:86%;
+    height:26px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:radial-gradient(ellipse, rgba(0,0,0,.55), transparent 70%);
 }
 
 .dome::after{
@@ -99,11 +149,11 @@ body{
 
     background:
     linear-gradient(
-        120deg,
-        rgba(255,255,255,.12),
-        transparent 25%,
-        transparent 70%,
-        rgba(255,255,255,.04)
+        118deg,
+        rgba(255,255,255,.14),
+        transparent 26%,
+        transparent 72%,
+        rgba(255,255,255,.05)
     );
 
     pointer-events:none;
@@ -112,58 +162,63 @@ body{
 .glass-highlight{
     position:absolute;
 
-    left:18px;
-    top:30px;
+    left:9%;
+    top:7%;
 
-    width:12px;
-    height:320px;
+    width:5%;
+    height:76%;
 
     border-radius:20px;
 
     background:
     linear-gradient(
         to right,
-        rgba(255,255,255,.28),
+        rgba(255,255,255,.30),
         transparent
     );
+
+    filter:blur(1px);
 }
 
 .base{
     position:absolute;
 
-    bottom:40px;
+    bottom:7.3%;
     left:50%;
 
     transform:translateX(-50%);
 
-    width:270px;
-    height:24px;
+    width:77.1%;
+    height:4.4%;
 
     border-radius:6px;
 
     background:
     linear-gradient(
         to bottom,
-        #444,
-        #171717
+        #4a4a52,
+        #232329 45%,
+        #101014
     );
 
     box-shadow:
-    0 10px 20px rgba(0,0,0,.8);
+    0 14px 28px rgba(0,0,0,.8),
+    inset 0 1px 0 rgba(255,255,255,.18);
 }
 
 .flower{
     position:absolute;
 
-    bottom:15px;
+    bottom:3.6%;
     left:50%;
 
     transform:translateX(-50%);
 
-    width:180px;
-    height:380px;
+    width:75%;
+    height:90.5%;
 
-    animation:flowerFloat 5s ease-in-out infinite alternate;
+    animation:flowerFloat 5.5s ease-in-out infinite alternate;
+    will-change:transform;
 }
 
 @keyframes flowerFloat{
@@ -173,15 +228,15 @@ body{
     }
 
     to{
-        transform:translateX(-50%) translateY(-10px);
+        transform:translateX(-50%) translateY(-2.6%);
     }
 }
 
 .stem{
     position:absolute;
 
-    width:8px;
-    height:260px;
+    width:4.4%;
+    height:68.4%;
 
     left:50%;
     bottom:0;
@@ -214,11 +269,11 @@ body{
 }
 
 .leaf-left{
-    width:45px;
-    height:100px;
+    width:25%;
+    height:26.3%;
 
-    bottom:70px;
-    left:30px;
+    bottom:18.4%;
+    left:16.7%;
 
     border-radius:100% 0 100% 0;
 
@@ -226,11 +281,11 @@ body{
 }
 
 .leaf-right{
-    width:45px;
-    height:100px;
+    width:25%;
+    height:26.3%;
 
-    bottom:150px;
-    right:30px;
+    bottom:39.5%;
+    right:16.7%;
 
     border-radius:0 100% 0 100%;
 
@@ -240,15 +295,16 @@ body{
 .bloom{
     position:absolute;
 
-    top:30px;
+    top:7.9%;
     left:50%;
 
     transform:translateX(-50%);
 
-    width:100px;
-    height:100px;
+    width:55.6%;
+    height:26.3%;
 
-    animation:bloomGlow 3s ease-in-out infinite alternate;
+    animation:bloomGlow 3.2s ease-in-out infinite alternate;
+    will-change:filter;
 }
 
 @keyframes bloomGlow{
@@ -267,10 +323,10 @@ body{
 }
 
 .petal-back{
-    width:60px;
-    height:75px;
+    width:60%;
+    height:75%;
 
-    left:20px;
+    left:20%;
 
     background:
     linear-gradient(
@@ -283,11 +339,11 @@ body{
 }
 
 .petal-left{
-    width:50px;
-    height:75px;
+    width:50%;
+    height:75%;
 
-    left:6px;
-    top:12px;
+    left:6%;
+    top:12%;
 
     transform:rotate(-22deg);
 
@@ -302,11 +358,11 @@ body{
 }
 
 .petal-right{
-    width:50px;
-    height:75px;
+    width:50%;
+    height:75%;
 
-    right:6px;
-    top:12px;
+    right:6%;
+    top:12%;
 
     transform:rotate(22deg);
 
@@ -321,10 +377,10 @@ body{
 }
 
 .petal-center{
-    width:58px;
-    height:90px;
+    width:58%;
+    height:90%;
 
-    left:21px;
+    left:21%;
 
     z-index:3;
 
@@ -359,6 +415,7 @@ body{
     0 0 20px rgba(255,255,255,.8);
 
     animation:floatUp linear forwards;
+    will-change:transform, opacity;
 }
 
 @keyframes floatUp{
@@ -397,6 +454,7 @@ body{
     0 0 10px rgba(255,60,100,.4);
 
     animation:fall 6s linear forwards;
+    will-change:transform, opacity;
 }
 
 @keyframes fall{
@@ -404,28 +462,31 @@ body{
     0%{
         top:70px;
         left:110px;
+        opacity:1;
     }
 
     100%{
         top:360px;
         left:var(--targetX);
         transform:rotate(540deg);
+        opacity:0;
     }
 }
 
 .message{
-    max-width:550px;
-    width:90%;
+    max-width:36rem;
+    width:100%;
 
     text-align:center;
 
-    color:white;
+    color:var(--ink);
 
     font-style:italic;
+    font-weight:400;
 
-    line-height:1.8;
+    line-height:1.75;
 
-    font-size:1.3rem;
+    font-size:clamp(1.05rem, 2.6vw + .6rem, 1.35rem);
 
     opacity:0;
 
@@ -436,16 +497,20 @@ body{
     text-shadow:
     0 0 12px rgba(255,60,90,.4);
 
-    margin-top:20px;
+    margin-top:28px;
 }
 
 .signature{
 
-    margin-top:20px;
+    margin-top:22px;
 
-    color:rgba(255,255,255,.35);
+    color:var(--ink-soft);
 
-    font-size:.95rem;
+    font-size:clamp(.72rem, 1.6vw, .85rem);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    text-align:center;
+    line-height:1.9;
 
     opacity:0;
 
@@ -491,13 +556,23 @@ body{
     }
 }
 
-@media (max-width:480px){
+@media (prefers-reduced-motion: reduce){
 
-    .scene{
-        transform:scale(.9);
+    .ambient-glow,
+    .flower,
+    .bloom,
+    .spark,
+    .falling-petal{
+        animation:none !important;
     }
 
     .message{
-        font-size:1.05rem;
+        animation:none;
+        opacity:1;
     }
-        }
+
+    .signature{
+        animation:none;
+        opacity:1;
+    }
+}
