@@ -26,14 +26,15 @@ body{
         radial-gradient(ellipse 120% 90% at 50% 110%, var(--bg-soft), transparent 70%),
         var(--bg);
     min-height:100vh;
-    min-height:100dvh;
+    height:100vh;
+    height:100dvh;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    overflow-x:hidden;
+    overflow:hidden;
     font-family:var(--serif);
-    padding:32px 20px 40px;
+    padding:16px 20px 20px;
     color:var(--ink);
 }
 
@@ -51,7 +52,7 @@ body{
 
 .scene{
     position:relative;
-    width:min(350px, 88vw);
+    width:min(350px, 88vw, 33dvh);
     height:auto;
     aspect-ratio:350 / 550;
     flex:none;
@@ -608,36 +609,29 @@ body{
 
     line-height:1.75;
 
-    font-size:clamp(1.05rem, 2.6vw + .6rem, 1.35rem);
+    font-size:clamp(1rem, 2.4vw + .55rem, 1.3rem);
 
-    opacity:0;
-
-    animation:
-    fadeInMessage 2.5s ease-out 1s forwards,
-    messageGlow 4s ease-in-out infinite alternate;
+    opacity:1;
 
     text-shadow:
-    0 0 12px rgba(255,60,90,.4);
+    0 0 14px rgba(255,60,90,.35);
 
-    margin-top:28px;
+    margin-top:18px;
 }
 
 .signature{
 
-    margin-top:22px;
+    margin-top:14px;
 
     color:var(--ink-soft);
 
-    font-size:clamp(.72rem, 1.6vw, .85rem);
+    font-size:clamp(.7rem, 1.6vw, .82rem);
     letter-spacing:.14em;
     text-transform:uppercase;
     text-align:center;
     line-height:1.9;
 
-    opacity:0;
-
-    animation:
-    fadeInSignature 3s ease-out 3s forwards;
+    opacity:1;
 }
 
 @keyframes fadeInMessage{
